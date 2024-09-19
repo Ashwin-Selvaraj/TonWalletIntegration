@@ -65,8 +65,6 @@ export default function Home(){
         }
     }
 
-   
-    
       const formatAddress = (address) => {
         const userFriendlyAddress = toUserFriendlyAddress(address);
         console.log("User Wallet Address "+userFriendlyAddress);
