@@ -1,4 +1,5 @@
 import { TonConnectButton, useTonConnectUI } from "@tonconnect/ui-react";
+import {toUserFriendlyAddress} from "@tonconnect/sdk"
 import React, { useCallback, useEffect, useState } from "react";
 // import { Address } from "@ton/core";
 // import { Buffer } from 'buffer';
@@ -15,7 +16,6 @@ export default function Home(){
     const [isLoading, setIsLoading] = useState(true);
 
     const handleWalletConnection = useCallback((address)=>{
-        console.log(address+"handle wallet connection");
         setTonWalletAddress(address);
         console.log("Wallet Connected Successfully!");
         setIsLoading(false);
@@ -66,20 +66,11 @@ export default function Home(){
     }
 
    
-      
-    
-    const hexToBase64Url = (hex) => {
-        const hexArray = hex.replace(/^0:/, ''); // Remove the '0:' prefix if it exists
-        const bytes = new Uint8Array(hexArray.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
-        const base64 = btoa(String.fromCharCode(...bytes));
-        // Convert Base64 to URL-safe Base64
-        return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-      };
     
       const formatAddress = (address) => {
-        const base64UrlAddress = hexToBase64Url(address); // Convert hex to Base64 URL-safe
-        console.log(base64UrlAddress);
-        return base64UrlAddress; // Directly return the Base64 URL-safe string
+        const userFriendlyAddress = toUserFriendlyAddress(address);
+        console.log("User Wallet Address "+userFriendlyAddress);
+        return userFriendlyAddress; // Directly return the Base64 URL-safe string
       };
 
     if(isLoading){
