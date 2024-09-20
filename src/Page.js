@@ -17,7 +17,7 @@ export default function Home(){
 
     const handleWalletConnection = useCallback((address)=>{
         setTonWalletAddress(address);
-        console.log("Wallet Connected Successfully!");
+        console.log("Wallet Connected Successfully! "+address);
         setIsLoading(false);
     },[])
 
